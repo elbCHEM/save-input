@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "save-input"
+version = "0.0.1"
+dependencies = [
+]
+requires-python = ">=3.12"
+authors = [
+  {name = "E.L.B"},
+]
+maintainers = [
+  {name = "E.L.B"},
+]
+description = ""
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E.*"]
+keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: OS Independent",
+]
