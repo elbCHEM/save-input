@@ -17,7 +17,7 @@ maintainers = [
 description = ""
 readme = "README.md"
 license = "MIT"
-license-files = ["LICEN[CS]E.*"]
+license-files = ["LICENSE"]
 keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
 classifiers = [
   "Development Status :: 1 - Planning",
