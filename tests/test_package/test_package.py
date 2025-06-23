@@ -5,8 +5,8 @@ def test_pytest_can_run() -> None:
 
 
 def test_import_package() -> None:
-    import save_input as _
+    import src.save_input as _
 
 
 def test_import_get_input() -> None:
-    from save_input.input import get_input as _
+    from src.save_input.input import get_input as _

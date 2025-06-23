@@ -1,7 +1,7 @@
 from typing import Literal, Callable, Any
 
 
-type Interpretor[T] = Callable[[str,], T]
+type Interpretor[T] = Callable[[str,], tuple[T, str]]
 type Validator[T] = Callable[[T], tuple[bool, str]]
 
 
@@ -16,8 +16,8 @@ class TooManyQuestionAsked(Exception):
         super().__init__(f"Too many question asked - Finished after {question_asked} questions.")
 
 
-def identity(x: Any) -> Any:
-    return x
+def identity_interpretor(x: Any) -> tuple[Any, Literal[""]]:
+    return x, ""
 
 
 def validate_nothing(x: Any) -> tuple[Literal[True], Literal[""]]:
@@ -27,7 +27,7 @@ def validate_nothing(x: Any) -> tuple[Literal[True], Literal[""]]:
 def get_input(
     prompt: str,
     /,
-    interpretor: Interpretor = identity,
+    interpretor: Interpretor = identity_interpretor,
     validator: Validator = validate_nothing,
     max_question: int = _MAX_QUESTIONS_ASKED,
 ) -> None | Any:
@@ -37,12 +37,19 @@ def get_input(
     for n in range(max_question):
         if "" == (raw_input_string := input(prompt)):
             return None
-        if (interpreted_input := interpretor(raw_input_string)) is None:
+        
+        # Interpret the results.
+        interpreted_input, errorstring = interpretor(raw_input_string)
+        if interpreted_input is None:
+            print(errorstring)
             continue
-
+        
+        # Check if provided result is valid.
         isvalid, errorstring = validator(interpreted_input)
-        if isvalid:
-            return interpreted_input
-        print(errorstring)
+        if not isvalid:
+            print(errorstring)
+            continue
+        
+        return interpreted_input
 
     raise TooManyQuestionAsked(n)
