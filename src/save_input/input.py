@@ -34,7 +34,6 @@ def get_input(
     if (max_question := min(max_question, _MAX_QUESTIONS_ASKED)) <= 0:
         raise ValueError(f"'max_questions' must be a positive integer - Was {max_question}")
 
-
     for n in range(max_question):
         if "" == (raw_input_string := input(prompt)):
             return None
